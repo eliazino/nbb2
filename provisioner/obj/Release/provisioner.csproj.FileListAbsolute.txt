@@ -1,0 +1,11 @@
+C:\Users\waheed\Desktop\some_folder\Works\seesharp\provisioner\provisioner\bin\Release\provisioner.exe.config
+C:\Users\waheed\Desktop\some_folder\Works\seesharp\provisioner\provisioner\obj\Release\provisioner.csprojResolveAssemblyReference.cache
+C:\Users\waheed\Desktop\some_folder\Works\seesharp\provisioner\provisioner\obj\Release\MainWindow.g.cs
+C:\Users\waheed\Desktop\some_folder\Works\seesharp\provisioner\provisioner\obj\Release\pages\cards\addCards.g.cs
+C:\Users\waheed\Desktop\some_folder\Works\seesharp\provisioner\provisioner\obj\Release\pages\cards\browseCards.g.cs
+C:\Users\waheed\Desktop\some_folder\Works\seesharp\provisioner\provisioner\obj\Release\pages\login.g.cs
+C:\Users\waheed\Desktop\some_folder\Works\seesharp\provisioner\provisioner\obj\Release\pages\staffs\ImportStaff.g.cs
+C:\Users\waheed\Desktop\some_folder\Works\seesharp\provisioner\provisioner\obj\Release\App.g.cs
+C:\Users\waheed\Desktop\some_folder\Works\seesharp\provisioner\provisioner\obj\Release\provisioner_Content.g.cs
+C:\Users\waheed\Desktop\some_folder\Works\seesharp\provisioner\provisioner\obj\Release\provisioner_MarkupCompile.cache
+C:\Users\waheed\Desktop\some_folder\Works\seesharp\provisioner\provisioner\obj\Release\provisioner_MarkupCompile.lref

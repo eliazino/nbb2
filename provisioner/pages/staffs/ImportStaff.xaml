@@ -1,0 +1,121 @@
+﻿<Page x:Class="provisioner.pages.staffs.ImportStaff"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:provisioner.pages.staffs"
+            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Loaded="Page_Loaded"
+      Title="Import Staff: ">
+
+    <Grid>
+        <Grid.Resources >
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.DataGrid.xaml" />
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ComboBox.xaml" />
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.GroupBox.xaml" />
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Grey.xaml" />
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="400*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="300">
+            <StackPanel MinHeight="35" Background="#323542" Margin="0,0,-900,0" Width="1200" Orientation="Vertical" RenderTransformOrigin="0,0" VerticalAlignment="Top" HorizontalAlignment="Right">
+                <Label FontSize="27" Foreground="White" Tag="NuLam" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Import Staff Data"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,0" HorizontalAlignment="Stretch" Orientation="Horizontal">
+            <StackPanel Margin="10,0,0,20" Orientation="Horizontal">
+                <Button Background="#FF10B1C1" Width="250" Height="40" x:Name="syncStaffType" VerticalAlignment="Top" Click="Button_Click_1">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:ImageAwesome Icon="Refresh" x:Name="syncIcon" Spin="False" Height="18" Foreground="White"></fa:ImageAwesome>
+                        <Label Content="Sync. Staff Type" FontSize="18" FontWeight ="Bold" Foreground="White"></Label>
+                    </StackPanel>
+                </Button>
+                <StackPanel Grid.Column="1" Grid.Row="0" Margin="25,0,25,0">
+                    <ComboBox x:Name="staffType" Height="30" Width="200" ToolTip="Choose Staff type" FontWeight="Bold" VerticalAlignment="Center">
+                        <Label FontWeight="Bold" Selector.IsSelected="True" VerticalAlignment="Center">Select Staff type to upload to:</Label>
+                    </ComboBox>
+                </StackPanel>
+                <Button x:Name="load"  Height="40" Width="250" Margin="20 0 0 0" Background="#FF323542" Click="uploader" VerticalAlignment="Top">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:ImageAwesome Icon="Upload" Name="ico" Foreground="White" Width="18" VerticalAlignment="Center" HorizontalAlignment="Center"></fa:ImageAwesome>
+                        <Label Foreground="White" FontSize="18px" Name="uico" HorizontalAlignment="Center" VerticalAlignment="Center">Upload .CSV File Only</Label>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="syncStaffs"  Height="40" Width="250" Margin="20 0 0 0" Background="#FF128080" Click="syncer" VerticalAlignment="Top">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:ImageAwesome Icon="Cloud" Name="syncIco" Foreground="White" Width="18" VerticalAlignment="Center" HorizontalAlignment="Center"></fa:ImageAwesome>
+                        <Label Foreground="White" FontSize="18px" Name="syncLabel" HorizontalAlignment="Center" VerticalAlignment="Center">Sync Staffs</Label>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+        <ScrollViewer Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <TabControl >
+                <TabItem Header="Staff" FontSize="18" Foreground="#FF06A406" Padding="20px">
+                    <StackPanel>
+                        <fa:ImageAwesome Icon="Spinner" Spin="True" Visibility="Visible" Name="spinner2" Width="30" Foreground="#FFFF0146"></fa:ImageAwesome>
+                        <DataGrid  AutoGenerateColumns="False" HorizontalAlignment="Stretch" FontWeight="Bold" FontSize="15" x:Name="transTab" MinWidth="500" Height="auto" ItemsSource="{Binding Source=list}" Foreground="Black" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn FontWeight="Bold" FontSize="15" Header="ID" Binding="{Binding ID}" IsReadOnly="True" />
+                                <DataGridTextColumn FontWeight="Bold" FontSize="15" Header="FullName" Binding="{Binding fullname}" />
+                                <DataGridTextColumn FontWeight="Bold" FontSize="15" Header="Staff ID" Binding="{Binding staffID}"/>
+                                <DataGridTextColumn FontWeight="Bold" FontSize="15" Header="Card Serial" Binding="{Binding cardSerial}"/>
+                                <DataGridTextColumn FontWeight="Bold" FontSize="15" Header="Staff Synced" Binding="{Binding staffSynced}"/>
+                                <DataGridTextColumn FontWeight="Bold" FontSize="15" Header="Designation" Binding="{Binding designation}"/>
+                                <DataGridTextColumn FontWeight="Bold" FontSize="15" Header="Staff type" Binding="{Binding staffType}"/>
+                                <DataGridTextColumn FontWeight="Bold" FontSize="15" Header="Location" Binding="{Binding location}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Duplicate Entry" FontSize="18" Foreground="#FFEA083B" Padding="20px">
+                    <StackPanel>
+                        <Button Background="#FFE02E12" Click="purgeConflict" Height="40">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:ImageAwesome Icon="Trash" Width="15" Foreground="white"></fa:ImageAwesome>
+                                <Label HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White">Delete past logs</Label>
+                            </StackPanel>
+                        </Button>
+                        <fa:ImageAwesome Icon="Spinner" Spin="True" Visibility="Visible" Name="spinner3" Width="30" Foreground="#FFFF0146"></fa:ImageAwesome>
+                        <DataGrid  AutoGenerateColumns="False" HorizontalAlignment="Stretch" FontWeight="Bold" FontSize="15" x:Name="transTab2" MinWidth="500" Height="auto" ItemsSource="{Binding Source=list}" Foreground="Black" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn FontWeight="Bold" FontSize="15" Header="ID" Binding="{Binding ID}" IsReadOnly="True" />
+                                <DataGridTextColumn FontWeight="Bold" FontSize="15" Header="FullName" Binding="{Binding fullname}" />
+                                <DataGridTextColumn FontWeight="Bold" FontSize="15" Header="Staff ID" Binding="{Binding staffID}"/>
+                                <DataGridTextColumn FontWeight="Bold" FontSize="15" Header="Card Serial" Binding="{Binding cardSerial}"/>
+                                <DataGridTextColumn FontWeight="Bold" FontSize="15" Header="Staff Synced" Binding="{Binding staffSynced}"/>
+                                <DataGridTextColumn FontWeight="Bold" FontSize="15" Header="Designation" Binding="{Binding designation}"/>
+                                <DataGridTextColumn FontWeight="Bold" FontSize="15" Header="Staff type" Binding="{Binding staffType}"/>
+                                <DataGridTextColumn FontWeight="Bold" FontSize="15" Header="Location" Binding="{Binding location}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+        </ScrollViewer>
+        <StackPanel Grid.ColumnSpan="2" Grid.Row="3" Orientation="Horizontal">
+            <Label VerticalAlignment="Center">Total Staffs</Label>
+            <Label VerticalAlignment="Center" x:Name="total">0</Label>
+            <Label Padding="20 0 0 0" VerticalAlignment="Center">Total Staffs Synced</Label>
+            <Label VerticalAlignment="Center" x:Name="synced">0</Label>
+        </StackPanel>
+    </Grid>
+</Page>
